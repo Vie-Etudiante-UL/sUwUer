@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 44304640}
   - component: {fileID: 44304643}
   - component: {fileID: 44304642}
+  - component: {fileID: 44304644}
   - component: {fileID: 44304641}
   m_Layer: 5
   m_Name: Start
@@ -205,7 +206,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 44304642}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 44304644}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: GoScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: SampleScene
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &44304642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,6 +257,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 44304639}
   m_CullTransparentMesh: 1
+--- !u!114 &44304644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44304639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e4b1e5a5dc71f4db647cc9d2c1c3c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &73697595
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,6 +280,7 @@ GameObject:
   - component: {fileID: 73697596}
   - component: {fileID: 73697599}
   - component: {fileID: 73697598}
+  - component: {fileID: 73697600}
   - component: {fileID: 73697597}
   m_Layer: 5
   m_Name: Exit
@@ -326,7 +352,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 73697598}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 73697600}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &73697598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,6 +403,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 73697595}
   m_CullTransparentMesh: 1
+--- !u!114 &73697600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73697595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e4b1e5a5dc71f4db647cc9d2c1c3c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &108913489
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,6 +912,7 @@ GameObject:
   - component: {fileID: 1775821229}
   - component: {fileID: 1775821232}
   - component: {fileID: 1775821231}
+  - component: {fileID: 1775821233}
   - component: {fileID: 1775821230}
   m_Layer: 5
   m_Name: Credits
@@ -933,7 +984,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1775821231}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1775821233}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: GoScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: CreditMenu
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1775821231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -972,6 +1035,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1775821228}
   m_CullTransparentMesh: 1
+--- !u!114 &1775821233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775821228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e4b1e5a5dc71f4db647cc9d2c1c3c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1998526897
 GameObject:
   m_ObjectHideFlags: 0
