@@ -11,19 +11,22 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rbPlayer;
     public Light2D lightPlayer;
     public GameObject screenGameOver;
+    public AudioSource dangerSound;
 
     private bool grounded;
     private bool running = true;
     public bool danger = false;
+    private bool detectWallRight;
 
     public float speed = 1f;
     public float jumpStrength = 100f;
     public float dangerDistance = 1f;
     public float distance = 0.25f;
-    public float heightDecal = -0.15f;
 
     void Update()
     {
+        WallRightDetection();
+
         if (Input.GetKeyDown("a"))
         {
             running = !running;
@@ -32,7 +35,12 @@ public class PlayerController : MonoBehaviour
         if (running)
         {
             lightPlayer.transform.position = transform.position + new Vector3(-5, 2.5f, 0);
-            rbPlayer.velocity = new Vector2(speed, rbPlayer.velocity.y);
+
+            if (detectWallRight == false)
+            {
+                rbPlayer.velocity = new Vector2(speed, rbPlayer.velocity.y);
+            }
+
             DetectGround();
             Jumping();
         } 
@@ -59,10 +67,33 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void WallRightDetection()
+    {
+        Vector3 originFirstRightRaycast = transform.position + new Vector3(0.45f, 0.4f, 0);
+        Vector3 originSecondRightRaycast = transform.position + new Vector3(0.45f, 0, 0);
+        Vector3 originThirdRightRaycast = transform.position + new Vector3(0.45f, -0.4f, 0);
+        Vector3 directionRight = new Vector3(-1, 0, 0);
+
+        if (Physics2D.Raycast(originFirstRightRaycast, directionRight, distance) || Physics2D.Raycast(originSecondRightRaycast, directionRight, distance) || Physics2D.Raycast(originThirdRightRaycast, directionRight, distance))
+        {
+            detectWallRight = true;
+            Debug.DrawRay(originFirstRightRaycast, directionRight * distance, Color.green);
+            Debug.DrawRay(originSecondRightRaycast, directionRight * distance, Color.green);
+            Debug.DrawRay(originThirdRightRaycast, directionRight * distance, Color.green);
+        }
+        else
+        {
+            detectWallRight = false;
+            Debug.DrawRay(originFirstRightRaycast, directionRight * distance, Color.red);
+            Debug.DrawRay(originSecondRightRaycast, directionRight * distance, Color.red);
+            Debug.DrawRay(originThirdRightRaycast, directionRight * distance, Color.red);
+        }
+    }
+
     void DetectGround()
     {
-        Vector3 originLeftRaycast = transform.position + new Vector3(-0.15f, heightDecal, 0);
-        Vector3 originRightRaycast = transform.position + new Vector3(0.15f, heightDecal, 0);
+        Vector3 originLeftRaycast = transform.position + new Vector3(-0.15f, -0.4f, 0);
+        Vector3 originRightRaycast = transform.position + new Vector3(0.15f, -0.4f, 0);
         Vector3 direction = new Vector3(0, -1, 0);
 
         if (Physics2D.Raycast(originLeftRaycast, direction, distance) || Physics2D.Raycast(originRightRaycast, direction, distance))
@@ -84,11 +115,13 @@ public class PlayerController : MonoBehaviour
         if(transform.position.x - monsterController.rbMonster.transform.position.x <= dangerDistance)
         {
             danger = true;
+            dangerSound.Play();
             lightPlayer.color = new Color32(255, 0, 0, 255);
-            StartCoroutine(cameraShaking.Shake(4.5f, 0.4f));
+            StartCoroutine(cameraShaking.Shake(5f, 0.4f));
         }
         else
         {
+            dangerSound.Stop();
             lightPlayer.color = new Color32(255, 255, 255, 255);
         }
     }
