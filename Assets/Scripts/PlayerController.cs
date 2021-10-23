@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         WallRightDetection();
         FallAcceleration();
 
-        if (Input.GetKeyDown("a"))
+        if (Input.GetKey("a"))
         {
             running = !running;
         }
