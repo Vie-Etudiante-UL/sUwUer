@@ -5,8 +5,11 @@ using TMPro;
 
 public class PlayerEntrance : MonoBehaviour
 {
+    public PlayerController playerController;
+
     public Rigidbody2D rbPlayer;
     public Canvas canvas;
+    public GameObject controlsWindow;
 
     public float speed = 1f;
     public string firstFullText;
@@ -16,6 +19,22 @@ public class PlayerEntrance : MonoBehaviour
     void Start()
     {
         StartCoroutine(Entrance());
+    }
+
+    private void Update()
+    {
+        if(controlsWindow.activeInHierarchy == true)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                controlsWindow.SetActive(false);
+            }
+        }
+    }
+
+    void DisplayControls()
+    {
+        controlsWindow.SetActive(true);
     }
 
     IEnumerator Entrance()
@@ -28,6 +47,8 @@ public class PlayerEntrance : MonoBehaviour
         }
 
         yield return new WaitForSeconds(2);
+
+        playerController.lightPlayer.transform.position = transform.position + new Vector3(5, 2.5f, 0);
 
         while (rbPlayer.transform.position.x >= -1)
         {
@@ -49,5 +70,10 @@ public class PlayerEntrance : MonoBehaviour
             canvas.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentText;
             yield return new WaitForSeconds(0.025f);
         }
+
+        yield return new WaitForSeconds(2f);
+
+        canvas.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "";
+        DisplayControls();
     }
 }
