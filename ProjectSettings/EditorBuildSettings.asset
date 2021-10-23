@@ -4,19 +4,5 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: bd0ef8382107d9547b26ff539b0df5a5
-  - enabled: 1
-<<<<<<< HEAD
-    path: Assets/Scenes/NathanScene.unity
-    guid: 0166814145e5d4e4bb2624e94f6f95fc
-=======
-    path: Assets/Scenes/CreditMenu.unity
-    guid: b837207eb887c2a46a134cc275b2599b
->>>>>>> 0fab49de1a013c640b2a38d7228928021d921d3a
+  m_Scenes: []
   m_configObjects: {}
