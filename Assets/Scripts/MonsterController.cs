@@ -21,5 +21,10 @@ public class MonsterController : MonoBehaviour
         {
             playerController.GameOver();
         }
+
+        if(colliderDetected.transform.tag == "Destructible")
+        {
+            Destroy(colliderDetected.gameObject);
+        }
     }
 }

@@ -20,12 +20,15 @@ public class PlayerController : MonoBehaviour
 
     public float speed = 1f;
     public float jumpStrength = 100f;
+    public float fallMultiplier = 1.1f;
+    public float maxFallSpeed = -10f;
     public float dangerDistance = 1f;
     public float distance = 0.25f;
 
     void Update()
     {
         WallRightDetection();
+        FallAcceleration();
 
         if (Input.GetKeyDown("a"))
         {
@@ -64,6 +67,15 @@ public class PlayerController : MonoBehaviour
             {
                 rbPlayer.AddForce(new Vector2(0, jumpStrength));
             }
+        }
+    }
+
+    void FallAcceleration()
+    {
+        if (rbPlayer.velocity.y < 0)
+        {
+
+            rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, Mathf.Clamp(rbPlayer.velocity.y * fallMultiplier, maxFallSpeed, 0));
         }
     }
 
