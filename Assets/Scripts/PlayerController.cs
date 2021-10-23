@@ -30,9 +30,13 @@ public class PlayerController : MonoBehaviour
         WallRightDetection();
         FallAcceleration();
 
-        if (Input.GetKeyDown("a"))
+        if (Input.GetMouseButton(0))
         {
-            running = !running;
+            running = false;
+        }
+        else
+        {
+            running = true;
         }
 
         if (running)
