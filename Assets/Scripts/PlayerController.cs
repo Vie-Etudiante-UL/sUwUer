@@ -1,15 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour
 {
+    public MonsterController monsterController;
+    public CameraShaking cameraShaking;
+
     public Rigidbody2D rbPlayer;
+    public Light2D lightPlayer;
+    public GameObject screenGameOver;
+
     private bool grounded;
     private bool running = true;
+    public bool danger = false;
 
     public float speed = 1f;
     public float jumpStrength = 100f;
+    public float dangerDistance = 1f;
     public float distance = 0.25f;
     public float heightDecal = -0.15f;
 
@@ -22,18 +31,20 @@ public class PlayerController : MonoBehaviour
 
         if (running)
         {
+            lightPlayer.transform.position = transform.position + new Vector3(-5, 2.5f, 0);
             rbPlayer.velocity = new Vector2(speed, rbPlayer.velocity.y);
             DetectGround();
             Jumping();
         } 
         else
         {
+            lightPlayer.transform.position = transform.position + new Vector3(5, 2.5f, 0);
             rbPlayer.velocity = new Vector2(0, rbPlayer.velocity.y);
         }
 
-        //if ()
+        if (!danger)
         {
-            GameOver();
+            DetectMonsterProximity();
         }
     }
 
@@ -68,8 +79,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void GameOver()
+    void DetectMonsterProximity()
     {
-        // écran game over + recommencer
+        if(transform.position.x - monsterController.rbMonster.transform.position.x <= dangerDistance)
+        {
+            danger = true;
+            lightPlayer.color = new Color32(255, 0, 0, 255);
+            StartCoroutine(cameraShaking.Shake(4.5f, 0.4f));
+        }
+        else
+        {
+            lightPlayer.color = new Color32(255, 255, 255, 255);
+        }
+    }
+
+    public void GameOver()
+    {
+        screenGameOver.SetActive(true);
     }
 }
