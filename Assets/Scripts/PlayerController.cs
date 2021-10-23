@@ -19,8 +19,8 @@ public class PlayerController : MonoBehaviour
     private bool detectWallRight;
 
     public float speed = 1f;
-    public float jumpStrength = 100f;
-    public float fallMultiplier = 1.1f;
+    public float jumpStrength = 315f;
+    public float fallMultiplier = 1.05f;
     public float maxFallSpeed = -10f;
     public float dangerDistance = 1f;
     public float distance = 0.25f;
