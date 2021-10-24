@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
 
         if (running)
         {
-            lightPlayer.transform.position = transform.position + new Vector3(-5, 2.5f, 0);
+            lightPlayer.transform.position = transform.position + new Vector3(-5, 1.5f, 0);
 
             if (detectWallRight == false)
             {
@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
         } 
         else
         {
-            lightPlayer.transform.position = transform.position + new Vector3(5, 2.5f, 0);
+            lightPlayer.transform.position = transform.position + new Vector3(5, 1.5f, 0);
             rbPlayer.velocity = new Vector2(0, rbPlayer.velocity.y);
         }
 

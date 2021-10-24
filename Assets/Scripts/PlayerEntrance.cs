@@ -6,13 +6,17 @@ using TMPro;
 public class PlayerEntrance : MonoBehaviour
 {
     public PlayerController playerController;
+    public MonsterController monsterController;
 
     public Rigidbody2D rbPlayer;
     public Canvas canvas;
     public GameObject controlsWindow;
+    public AudioSource terrifyingSound;
 
     public float speed = 1f;
     public string firstFullText;
+    public string secondFullText;
+    public string thirdFullText;
 
     private string currentText = "";
 
@@ -48,7 +52,7 @@ public class PlayerEntrance : MonoBehaviour
 
         yield return new WaitForSeconds(2);
 
-        playerController.lightPlayer.transform.position = transform.position + new Vector3(5, 2.5f, 0);
+        playerController.lightPlayer.transform.position = transform.position + new Vector3(5, 1.5f, 0);
 
         while (rbPlayer.transform.position.x >= -1)
         {
@@ -74,6 +78,72 @@ public class PlayerEntrance : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         canvas.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "";
+
+        yield return new WaitForSeconds(1f);
+
+        StartCoroutine(ProgressiveDialogue2());
+    }
+
+    IEnumerator ProgressiveDialogue2()
+    {
+        for (int i = 0; i <= secondFullText.Length; i++)
+        {
+            currentText = secondFullText.Substring(0, i);
+            canvas.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentText;
+            yield return new WaitForSeconds(0.025f);
+        }
+
+        yield return new WaitForSeconds(2f);
+
+        canvas.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "";
+
+        yield return new WaitForSeconds(1f);
+
+        StartCoroutine(TerrifyingSound());
+    }
+
+    IEnumerator TerrifyingSound()
+    {
+        monsterController.gameObject.SetActive(true);
+        StartCoroutine(monsterController.ApparitionMonster());
+        terrifyingSound.Play();
+
+        yield return new WaitForSeconds(1f);
+
+        StartCoroutine(PrecipitationPlayer());
+    }
+
+    IEnumerator PrecipitationPlayer()
+    {
+        playerController.lightPlayer.transform.position = transform.position + new Vector3(-5, 1.5f, 0);
+
+        while (rbPlayer.transform.position.x <= 0)
+        {
+            rbPlayer.velocity = new Vector2(speed * 2, 0);
+
+            yield return new WaitForSeconds(0.025f);
+        }
+
+        yield return new WaitForSeconds(1);
+
+        StartCoroutine(ProgressiveDialogue3());
+    }
+
+    IEnumerator ProgressiveDialogue3()
+    {
+        for (int i = 0; i <= thirdFullText.Length; i++)
+        {
+            currentText = thirdFullText.Substring(0, i);
+            canvas.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentText;
+            yield return new WaitForSeconds(0.025f);
+        }
+
+        yield return new WaitForSeconds(2f);
+
+        canvas.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "";
+
+        yield return new WaitForSeconds(1f);
+
         DisplayControls();
     }
 }
