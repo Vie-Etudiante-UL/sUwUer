@@ -11,7 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Cinematic.unity
     guid: 0166814145e5d4e4bb2624e94f6f95fc
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/AntoineScene.unity
-    guid: d63c588e5d51caf46a9bf9c838b814b9
+    path: Assets/Scenes/NathanScene.unity
+    guid: 098df46fe7530534f8a7d86581fffc5f
   m_configObjects: {}
