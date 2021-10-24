@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     public Light2D lightPlayer;
     public GameObject screenGameOver;
     public AudioSource dangerSound;
+    public Animator animatorPlayer;
+    public SpriteRenderer spritePlayer;
 
     private bool grounded;
     private bool running = true;
@@ -32,10 +34,14 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
+            spritePlayer.flipX = true;
+            animatorPlayer.SetBool("isRunning", false);
             running = false;
         }
         else
         {
+            spritePlayer.flipX = false;
+            animatorPlayer.SetBool("isRunning", true);
             running = true;
         }
 
@@ -138,7 +144,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             dangerSound.Stop();
-            lightPlayer.color = new Color32(255, 255, 255, 255);
+            lightPlayer.color = new Color32(75, 139, 183, 255);
         }
     }
 
