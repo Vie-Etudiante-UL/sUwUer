@@ -12,6 +12,8 @@ public class PlayerEntrance : MonoBehaviour
     public Canvas canvas;
     public GameObject controlsWindow;
     public AudioSource terrifyingSound;
+    public Animator animatorPlayer;
+    public SpriteRenderer spritePlayer;
 
     public float speed = 1f;
     public string firstFullText;
@@ -43,16 +45,21 @@ public class PlayerEntrance : MonoBehaviour
 
     IEnumerator Entrance()
     {
-        while(rbPlayer.transform.position.x <= 0)
+        animatorPlayer.SetBool("isMoving", true);
+
+        while (rbPlayer.transform.position.x <= 0)
         {
             rbPlayer.velocity = new Vector2(speed, 0);
 
             yield return new WaitForSeconds(0.025f);
         }
 
+        animatorPlayer.SetBool("isMoving", false);
         yield return new WaitForSeconds(2);
 
+        spritePlayer.flipX = true;
         playerController.lightPlayer.transform.position = transform.position + new Vector3(5, 1.5f, 0);
+        animatorPlayer.SetBool("isMoving", true);
 
         while (rbPlayer.transform.position.x >= -1)
         {
@@ -61,6 +68,7 @@ public class PlayerEntrance : MonoBehaviour
             yield return new WaitForSeconds(0.025f);
         }
 
+        animatorPlayer.SetBool("isMoving", false);
         yield return new WaitForSeconds(2);
 
         StartCoroutine(ProgressiveDialogue1());
@@ -116,6 +124,8 @@ public class PlayerEntrance : MonoBehaviour
     IEnumerator PrecipitationPlayer()
     {
         playerController.lightPlayer.transform.position = transform.position + new Vector3(-5, 1.5f, 0);
+        spritePlayer.flipX = false;
+        animatorPlayer.SetBool("isMoving", true);
 
         while (rbPlayer.transform.position.x <= 0)
         {
@@ -124,6 +134,7 @@ public class PlayerEntrance : MonoBehaviour
             yield return new WaitForSeconds(0.025f);
         }
 
+        animatorPlayer.SetBool("isMoving", false);
         yield return new WaitForSeconds(1);
 
         StartCoroutine(ProgressiveDialogue3());
