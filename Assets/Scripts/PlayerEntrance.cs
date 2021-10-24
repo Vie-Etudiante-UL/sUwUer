@@ -155,7 +155,7 @@ public class PlayerEntrance : MonoBehaviour
             yield return new WaitForSeconds(0.025f);
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         canvas.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "";
 
