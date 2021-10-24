@@ -1631,7 +1631,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 5e680604adf8c2849885a39d4db0ee48, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c7c343a3f9c832f4dae42d6f76086b26, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -7677,8 +7677,10 @@ MonoBehaviour:
   cameraShaking: {fileID: 1850842951}
   rbPlayer: {fileID: 1273372480}
   lightPlayer: {fileID: 382653508}
-  screenGameOver: {fileID: 0}
   dangerSound: {fileID: 619203902}
+  animatorPlayer: {fileID: 0}
+  spritePlayer: {fileID: 0}
+  menuGameOver: {fileID: 0}
   danger: 0
   speed: 3
   jumpStrength: 325
@@ -7746,8 +7748,8 @@ MonoBehaviour:
   speed: 2
   firstFullText: Shit, I'm completely lost !
   secondFullText: What is this place ?
-  thirdFullText: WOOHHH !!! WHAT IS THAT THING ???
-  fourthFullText: LET'S RUUUUUN !!!
+  thirdFullText: WOOHHH !!! WHAT IS THAT THING ??? I HAVE TO RUN !
+  fourthFullText: 
 --- !u!95 &1273372482
 Animator:
   serializedVersion: 3

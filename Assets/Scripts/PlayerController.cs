@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer spritePlayer;
     public GameObject menuGameOver;
 
-    //private bool grounded;
+    private bool grounded;
     private bool running = true;
     public bool danger = false;
     private bool detectWallRight;
@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     {
         WallRightDetection();
         FallAcceleration();
+        DetectGround();
 
         if (Input.GetMouseButton(0))
         {
@@ -56,7 +57,6 @@ public class PlayerController : MonoBehaviour
                 rbPlayer.velocity = new Vector2(speed, rbPlayer.velocity.y);
             }
 
-            DetectGround();
             Jumping();
         } 
         else
@@ -73,15 +73,16 @@ public class PlayerController : MonoBehaviour
 
     void Jumping()
     {
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space) && jumpPress == false)
             {
+                animatorPlayer.SetBool("isRunning", false);
                 rbPlayer.AddForce(new Vector2(0, jumpStrength));
                 timePressed = timePressed + Time.deltaTime;
 
                 if (timePressed > 0.1f)
                 {
                     FallAcceleration();
-                    jumpPress = false;
+                    jumpPress = true;
                 }
             }
 
@@ -89,6 +90,7 @@ public class PlayerController : MonoBehaviour
             {
                 FallAcceleration();
                 timePressed = 0f;
+                jumpPress = true;
             }
     }
 
@@ -97,6 +99,17 @@ public class PlayerController : MonoBehaviour
         if (rbPlayer.velocity.y < 0)
         {
             rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, Mathf.Clamp(rbPlayer.velocity.y * fallMultiplier, maxFallSpeed, 0));
+        }
+
+        if (grounded)
+        {
+            animatorPlayer.SetBool("isRunning", true);
+            animatorPlayer.SetBool("isGrounded", true);
+            jumpPress = false;
+        }
+        else if (!grounded)
+        {
+            animatorPlayer.SetBool("isGrounded", false);
         }
     }
 
@@ -137,13 +150,13 @@ public class PlayerController : MonoBehaviour
 
         if (Physics2D.Raycast(originLeftRaycast, direction, distance) || Physics2D.Raycast(originRightRaycast, direction, distance))
         {
-            //grounded = true;
+            grounded = true;
             Debug.DrawRay(originLeftRaycast, direction * distance, Color.green);
             Debug.DrawRay(originRightRaycast, direction * distance, Color.green);
         }
         else
         {
-            //grounded = false;
+            grounded = false;
             Debug.DrawRay(originLeftRaycast, direction * distance, Color.red);
             Debug.DrawRay(originRightRaycast, direction * distance, Color.red);
         }
