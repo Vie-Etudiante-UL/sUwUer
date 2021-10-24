@@ -34,7 +34,7 @@ public class PlayerEntrance : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                controlsWindow.SetActive(false);
+                SceneManager.LoadScene("Scenes/" + "NathanScene");
             }
         }
     }
@@ -42,11 +42,6 @@ public class PlayerEntrance : MonoBehaviour
     void DisplayControls()
     {
         controlsWindow.SetActive(true);
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SceneManager.LoadScene("NathanScene");
-        }
     }
 
     IEnumerator Entrance()
