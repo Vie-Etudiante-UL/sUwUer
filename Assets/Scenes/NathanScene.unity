@@ -3220,9 +3220,10 @@ MonoBehaviour:
   dangerSound: {fileID: 21692717}
   animatorPlayer: {fileID: 209553610}
   spritePlayer: {fileID: 209553615}
+  menuGameOver: {fileID: 0}
   danger: 0
   speed: 3
-  jumpStrength: 325
+  jumpStrength: 1250
   fallMultiplier: 1.1
   maxFallSpeed: -10
   dangerDistance: 4

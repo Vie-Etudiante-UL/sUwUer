@@ -21,11 +21,12 @@ public class PlayerController : MonoBehaviour
     private bool running = true;
     public bool danger = false;
     private bool detectWallRight;
+    private float timePressed = 0f;
 
     public float speed = 1f;
     public float jumpStrength = 315f;
-    public float fallMultiplier = 1.05f;
-    public float maxFallSpeed = -10f;
+    public float fallMultiplier = 1.5f;
+    public float maxFallSpeed = -0.5f;
     public float dangerDistance = 1f;
     public float distance = 0.25f;
 
@@ -75,9 +76,20 @@ public class PlayerController : MonoBehaviour
     {
         if (grounded)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space))
             {
-                rbPlayer.AddForce(new Vector2(0, jumpStrength));
+                timePressed = timePressed + Time.deltaTime;
+
+                if (timePressed > 0.3f)
+                {
+                    timePressed = 0.3f;
+                }
+            }
+
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                rbPlayer.AddForce(new Vector2(0, jumpStrength * timePressed));
+                timePressed = 0f;
             }
         }
     }
@@ -86,7 +98,6 @@ public class PlayerController : MonoBehaviour
     {
         if (rbPlayer.velocity.y < 0)
         {
-
             rbPlayer.velocity = new Vector2(rbPlayer.velocity.x, Mathf.Clamp(rbPlayer.velocity.y * fallMultiplier, maxFallSpeed, 0));
         }
     }
