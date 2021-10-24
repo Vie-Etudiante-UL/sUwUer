@@ -15,11 +15,12 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer spritePlayer;
     public GameObject menuGameOver;
 
-    private bool grounded;
+    //private bool grounded;
     private bool running = true;
     public bool danger = false;
     private bool detectWallRight;
     private float timePressed = 0f;
+    private bool jumpPress = false;
 
     public float speed = 1f;
     public float jumpStrength = 315f;
@@ -72,24 +73,23 @@ public class PlayerController : MonoBehaviour
 
     void Jumping()
     {
-        if (grounded)
-        {
             if (Input.GetKey(KeyCode.Space))
             {
+                rbPlayer.AddForce(new Vector2(0, jumpStrength));
                 timePressed = timePressed + Time.deltaTime;
 
-                if (timePressed > 0.3f)
+                if (timePressed > 0.1f)
                 {
-                    timePressed = 0.3f;
+                    FallAcceleration();
+                    jumpPress = false;
                 }
             }
 
             if (Input.GetKeyUp(KeyCode.Space))
             {
-                rbPlayer.AddForce(new Vector2(0, jumpStrength * timePressed));
+                FallAcceleration();
                 timePressed = 0f;
             }
-        }
     }
 
     void FallAcceleration()
@@ -137,13 +137,13 @@ public class PlayerController : MonoBehaviour
 
         if (Physics2D.Raycast(originLeftRaycast, direction, distance) || Physics2D.Raycast(originRightRaycast, direction, distance))
         {
-            grounded = true;
+            //grounded = true;
             Debug.DrawRay(originLeftRaycast, direction * distance, Color.green);
             Debug.DrawRay(originRightRaycast, direction * distance, Color.green);
         }
         else
         {
-            grounded = false;
+            //grounded = false;
             Debug.DrawRay(originLeftRaycast, direction * distance, Color.red);
             Debug.DrawRay(originRightRaycast, direction * distance, Color.red);
         }
