@@ -43,7 +43,7 @@ public class PlayerEntrance : MonoBehaviour
     {
         controlsWindow.SetActive(true);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown("a"))
         {
             SceneManager.LoadScene("NathanScene");
         }
