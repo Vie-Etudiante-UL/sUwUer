@@ -4,26 +4,26 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 
-
-
 public class PauseMenuManager : MonoBehaviour
 {
+    public PlayerController playerController;
+
+    public bool pause = false;
+
     public GameObject toggleMenu;
     public GameObject menu;
-
-    void Start()
-    {
-
-    }
 
     public void Pause()
     {
         //audioMixer.SetFloat("Effets", -80f);
+        pause = true;
+        playerController.runSound.Stop();
         Time.timeScale = 0;
     }
 
     public void UnPause()
     {
+        pause = false;
         Time.timeScale = 1;
     }
 

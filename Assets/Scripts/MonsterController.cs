@@ -21,19 +21,33 @@ public class MonsterController : MonoBehaviour
         }
         
         DetectDestructible();
+        DetectPlayer();
     }
 
-    private void OnCollisionEnter2D(Collision2D colliderDetected)
+    public void DetectPlayer()
     {
-        if (colliderDetected.transform.name == "Player")
+        Vector3 originRaycast = transform.position + new Vector3(1.75f, 4f, 0);
+        Vector3 direction = new Vector3(0, -1, 0);
+
+        if (Physics2D.Raycast(originRaycast, direction, distance))
         {
-            playerController.GameOver();
+            GameObject objectHit = Physics2D.Raycast(originRaycast, direction, distance).transform.gameObject;
+
+            if (objectHit.tag == "Player")
+            {
+                playerController.GameOver();
+            }
+            Debug.DrawRay(originRaycast, direction * distance, Color.green);
+        }
+        else
+        {
+            Debug.DrawRay(originRaycast, direction * distance, Color.red);
         }
     }
 
     public void DetectDestructible()
     {
-        Vector3 originRaycast = transform.position + new Vector3(2.75f, 4f, 0);
+        Vector3 originRaycast = transform.position + new Vector3(2f, 4f, 0);
         Vector3 direction = new Vector3(0, -1, 0);
 
         if (Physics2D.Raycast(originRaycast, direction, distance))

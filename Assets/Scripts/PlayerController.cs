@@ -7,10 +7,17 @@ public class PlayerController : MonoBehaviour
 {
     public MonsterController monsterController;
     public CameraShaking cameraShaking;
+    public Win win;
+    public PauseMenuManager pauseMenuManager;
 
     public Rigidbody2D rbPlayer;
     public Light2D lightPlayer;
+    public AudioSource ambiantSound;
+    public AudioSource runSound;
     public AudioSource dangerSound;
+    public AudioSource monsterSound;
+    public AudioSource monsterSound2;
+    public AudioSource gameOverSound;
     public Animator animatorPlayer;
     public SpriteRenderer spritePlayer;
     public GameObject menuGameOver;
@@ -19,8 +26,8 @@ public class PlayerController : MonoBehaviour
     private bool running = true;
     public bool danger = false;
     private bool detectWallRight;
-    private float timePressed = 0f;
-    private bool jumpPress = false;
+    private bool gameOverLaunched = false;
+    private bool playerFear = false;
 
     public float speed = 1f;
     public float jumpStrength = 315f;
@@ -28,15 +35,18 @@ public class PlayerController : MonoBehaviour
     public float maxFallSpeed = -0.5f;
     public float dangerDistance = 1f;
     public float distance = 0.25f;
+    public float time = 0f;
 
     void Update()
     {
+        time += 1;
         WallRightDetection();
         FallAcceleration();
         DetectGround();
 
         if (Input.GetMouseButton(0))
         {
+            runSound.Stop();
             spritePlayer.flipX = true;
             animatorPlayer.SetBool("isRunning", false);
             running = false;
@@ -69,29 +79,34 @@ public class PlayerController : MonoBehaviour
         {
             DetectMonsterProximity();
         }
+
+        if(time == 1000)
+        {
+            playerFear = true;
+            lightPlayer.color = new Color32(255, 0, 0, 255);
+            monsterSound.Play();
+            StartCoroutine(Fear());
+        }
+
+        if(time == 3000)
+        {
+            playerFear = true;
+            lightPlayer.color = new Color32(255, 0, 0, 255);
+            monsterSound2.Play();
+            StartCoroutine(Fear());
+        }
     }
 
     void Jumping()
     {
-            if (Input.GetKey(KeyCode.Space) && jumpPress == false)
+        if (grounded)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 animatorPlayer.SetBool("isRunning", false);
                 rbPlayer.AddForce(new Vector2(0, jumpStrength));
-                timePressed = timePressed + Time.deltaTime;
-
-                if (timePressed > 0.1f)
-                {
-                    FallAcceleration();
-                    jumpPress = true;
-                }
-            }
-
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
-                FallAcceleration();
-                timePressed = 0f;
-                jumpPress = true;
-            }
+            }   
+        } 
     }
 
     void FallAcceleration()
@@ -105,7 +120,6 @@ public class PlayerController : MonoBehaviour
         {
             animatorPlayer.SetBool("isRunning", true);
             animatorPlayer.SetBool("isGrounded", true);
-            jumpPress = false;
         }
         else if (!grounded)
         {
@@ -151,12 +165,17 @@ public class PlayerController : MonoBehaviour
         if (Physics2D.Raycast(originLeftRaycast, direction, distance) || Physics2D.Raycast(originRightRaycast, direction, distance))
         {
             grounded = true;
+            if (!runSound.isPlaying && running == true && gameOverLaunched == false && win.victoire == false && pauseMenuManager.pause == false)
+            {
+                runSound.Play();
+            }
             Debug.DrawRay(originLeftRaycast, direction * distance, Color.green);
             Debug.DrawRay(originRightRaycast, direction * distance, Color.green);
         }
         else
         {
             grounded = false;
+            runSound.Stop();
             Debug.DrawRay(originLeftRaycast, direction * distance, Color.red);
             Debug.DrawRay(originRightRaycast, direction * distance, Color.red);
         }
@@ -174,13 +193,32 @@ public class PlayerController : MonoBehaviour
         else
         {
             dangerSound.Stop();
-            lightPlayer.color = new Color32(75, 139, 183, 255);
+
+            if(playerFear == false)
+            {
+                lightPlayer.color = new Color32(75, 139, 183, 255);
+            }
         }
     }
 
     public void GameOver()
     {
-        menuGameOver.SetActive(true);
-        Time.timeScale = 0;
+        if (gameOverLaunched == false)
+        {
+            gameOverLaunched = true;
+            runSound.Stop();
+            ambiantSound.Stop();
+            gameOverSound.Play();
+            menuGameOver.SetActive(true);
+            Time.timeScale = 0;
+        }
+    }
+
+    IEnumerator Fear()
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        lightPlayer.color = new Color32(75, 139, 183, 255);
+        playerFear = false;
     }
 }

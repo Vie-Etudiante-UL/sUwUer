@@ -12,7 +12,11 @@ public class PlayerEntrance : MonoBehaviour
     public Rigidbody2D rbPlayer;
     public Canvas canvas;
     public GameObject controlsWindow;
+    public AudioSource ambiantSound;
+    public AudioSource walkSound;
     public AudioSource terrifyingSound;
+    public AudioSource terrifyingSound2;
+    public AudioSource heartSound;
     public Animator animatorPlayer;
     public SpriteRenderer spritePlayer;
 
@@ -55,11 +59,13 @@ public class PlayerEntrance : MonoBehaviour
             yield return new WaitForSeconds(0.025f);
         }
 
+        walkSound.Stop();
         animatorPlayer.SetBool("isMoving", false);
         yield return new WaitForSeconds(2);
 
         spritePlayer.flipX = true;
         playerController.lightPlayer.transform.position = transform.position + new Vector3(5, 1.5f, 0);
+        walkSound.Play();
         animatorPlayer.SetBool("isMoving", true);
 
         while (rbPlayer.transform.position.x >= -1)
@@ -69,6 +75,7 @@ public class PlayerEntrance : MonoBehaviour
             yield return new WaitForSeconds(0.025f);
         }
 
+        walkSound.Stop();
         animatorPlayer.SetBool("isMoving", false);
         yield return new WaitForSeconds(2);
 
@@ -116,6 +123,9 @@ public class PlayerEntrance : MonoBehaviour
         monsterController.gameObject.SetActive(true);
         StartCoroutine(monsterController.ApparitionMonster());
         terrifyingSound.Play();
+        terrifyingSound2.Play();
+        ambiantSound.Stop();
+        heartSound.Play();
 
         yield return new WaitForSeconds(1f);
 
@@ -126,6 +136,7 @@ public class PlayerEntrance : MonoBehaviour
     {
         playerController.lightPlayer.transform.position = transform.position + new Vector3(-5, 1.5f, 0);
         spritePlayer.flipX = false;
+        walkSound.Play();
         animatorPlayer.SetBool("isMoving", true);
 
         while (rbPlayer.transform.position.x <= 0)
@@ -135,6 +146,7 @@ public class PlayerEntrance : MonoBehaviour
             yield return new WaitForSeconds(0.025f);
         }
 
+        walkSound.Stop();
         animatorPlayer.SetBool("isMoving", false);
         yield return new WaitForSeconds(1);
 
