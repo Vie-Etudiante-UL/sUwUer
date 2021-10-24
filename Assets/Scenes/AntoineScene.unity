@@ -3219,7 +3219,7 @@ MonoBehaviour:
   dangerSound: {fileID: 21692717}
   animatorPlayer: {fileID: 209553610}
   spritePlayer: {fileID: 209553615}
-  menuGameOver: {fileID: 770458943}
+  menuGameOver: {fileID: 2014920057}
   danger: 0
   speed: 3
   jumpStrength: 1250
@@ -11832,11 +11832,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &770458943 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6611344346351178731, guid: 39ef29848246c4347aa481350e7dcf61, type: 3}
-  m_PrefabInstance: {fileID: 2016773824}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &773524722
 GameObject:
   m_ObjectHideFlags: 0
@@ -30426,6 +30421,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2014920057 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6611344346503122509, guid: 39ef29848246c4347aa481350e7dcf61, type: 3}
+  m_PrefabInstance: {fileID: 2016773824}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2016773824
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30482,6 +30482,10 @@ PrefabInstance:
       value: MenuGameOver
       objectReference: {fileID: 0}
     - target: {fileID: 6611344346351178731, guid: 39ef29848246c4347aa481350e7dcf61, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6611344346503122509, guid: 39ef29848246c4347aa481350e7dcf61, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
