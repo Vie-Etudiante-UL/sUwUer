@@ -144,6 +144,6 @@ public class PlayerController : MonoBehaviour
 
     public void GameOver()
     {
-        screenGameOver.SetActive(true);
+        //
     }
 }

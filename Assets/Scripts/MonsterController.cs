@@ -8,14 +8,14 @@ public class MonsterController : MonoBehaviour
 
     public Rigidbody2D rbMonster;
 
-    private bool monsterIsReady = false;
+    public bool monsterIsReady = true;
 
     public float speed = 0.5f;
     public float distance = 0.25f;
 
     void Update()
     {
-        if (monsterIsReady)
+        if (monsterIsReady == true)
         {
             rbMonster.velocity = new Vector2(speed, rbMonster.velocity.y);
         }

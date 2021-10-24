@@ -19,6 +19,7 @@ public class PlayerEntrance : MonoBehaviour
     public string firstFullText;
     public string secondFullText;
     public string thirdFullText;
+    public string fourthFullText;
 
     private string currentText = "";
 
@@ -149,7 +150,25 @@ public class PlayerEntrance : MonoBehaviour
             yield return new WaitForSeconds(0.025f);
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
+
+        canvas.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "";
+
+        yield return new WaitForSeconds(1f);
+
+        StartCoroutine(ProgressiveDialogue4());
+    }
+
+    IEnumerator ProgressiveDialogue4()
+    {
+        for (int i = 0; i <= fourthFullText.Length; i++)
+        {
+            currentText = fourthFullText.Substring(0, i);
+            canvas.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentText;
+            yield return new WaitForSeconds(0.025f);
+        }
+
+        yield return new WaitForSeconds(1f);
 
         canvas.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "";
 
