@@ -94,6 +94,8 @@ public class PlayerController : MonoBehaviour
         Vector3 originFirstRightRaycast = transform.position + new Vector3(0.45f, 0.4f, 0);
         Vector3 originSecondRightRaycast = transform.position + new Vector3(0.45f, 0, 0);
         Vector3 originThirdRightRaycast = transform.position + new Vector3(0.45f, -0.4f, 0);
+        Vector3 originFourthRightRaycast = transform.position + new Vector3(0.45f, -0.7f, 0);
+        Vector3 originThifthRightRaycast = transform.position + new Vector3(0.45f, 0.7f, 0);
         Vector3 directionRight = new Vector3(-1, 0, 0);
 
         if (Physics2D.Raycast(originFirstRightRaycast, directionRight, distance) || Physics2D.Raycast(originSecondRightRaycast, directionRight, distance) || Physics2D.Raycast(originThirdRightRaycast, directionRight, distance))
@@ -102,6 +104,8 @@ public class PlayerController : MonoBehaviour
             Debug.DrawRay(originFirstRightRaycast, directionRight * distance, Color.green);
             Debug.DrawRay(originSecondRightRaycast, directionRight * distance, Color.green);
             Debug.DrawRay(originThirdRightRaycast, directionRight * distance, Color.green);
+            Debug.DrawRay(originFourthRightRaycast, directionRight * distance, Color.green);
+            Debug.DrawRay(originThifthRightRaycast, directionRight * distance, Color.green);
         }
         else
         {
@@ -109,13 +113,15 @@ public class PlayerController : MonoBehaviour
             Debug.DrawRay(originFirstRightRaycast, directionRight * distance, Color.red);
             Debug.DrawRay(originSecondRightRaycast, directionRight * distance, Color.red);
             Debug.DrawRay(originThirdRightRaycast, directionRight * distance, Color.red);
+            Debug.DrawRay(originFourthRightRaycast, directionRight * distance, Color.red);
+            Debug.DrawRay(originThifthRightRaycast, directionRight * distance, Color.red);
         }
     }
 
     void DetectGround()
     {
-        Vector3 originLeftRaycast = transform.position + new Vector3(-0.15f, -0.4f, 0);
-        Vector3 originRightRaycast = transform.position + new Vector3(0.15f, -0.4f, 0);
+        Vector3 originLeftRaycast = transform.position + new Vector3(-0.15f, -0.8f, 0);
+        Vector3 originRightRaycast = transform.position + new Vector3(0.15f, -0.8f, 0);
         Vector3 direction = new Vector3(0, -1, 0);
 
         if (Physics2D.Raycast(originLeftRaycast, direction, distance) || Physics2D.Raycast(originRightRaycast, direction, distance))
