@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     public GameObject screenGameOver;
     public AudioSource dangerSound;
 
+    public GameObject menuGameOver;
+
     private bool grounded;
     private bool running = true;
     public bool danger = false;
@@ -144,6 +146,6 @@ public class PlayerController : MonoBehaviour
 
     public void GameOver()
     {
-        //
+        menuGameOver.SetActive(true);
     }
 }
