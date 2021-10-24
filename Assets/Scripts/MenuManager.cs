@@ -9,7 +9,7 @@ public class MenuManager : MonoBehaviour
 
     void Start()
     {
-        
+        Time.timeScale = 1;
     }
     public void GoScene(string name)
     {

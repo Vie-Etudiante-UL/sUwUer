@@ -10,11 +10,9 @@ public class PlayerController : MonoBehaviour
 
     public Rigidbody2D rbPlayer;
     public Light2D lightPlayer;
-    public GameObject screenGameOver;
     public AudioSource dangerSound;
     public Animator animatorPlayer;
     public SpriteRenderer spritePlayer;
-
     public GameObject menuGameOver;
 
     private bool grounded;
@@ -170,5 +168,6 @@ public class PlayerController : MonoBehaviour
     public void GameOver()
     {
         menuGameOver.SetActive(true);
+        Time.timeScale = 0;
     }
 }
