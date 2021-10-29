@@ -2,7 +2,7 @@
 
 Jeu réalisé dans le cadre de la Spooky2DJam à laquelle les étudiants ont participés pour une animation de la e.MDE de l'Université de Lorraine.
 
-Vous êtes dans les égouts, un montres vous poursuit, fuyez ! Un seul problème, vous ne pouvez pas regarder devant vous et courir en même temps. Bonne chance !
+Vous êtes dans les égouts, un monstre vous poursuit, fuyez ! Un seul problème, vous ne pouvez pas regarder devant-vous et courir en même temps. Bonne chance !
 
 <h2>Equipe :</h2>
 
